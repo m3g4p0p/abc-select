@@ -1,0 +1,41 @@
+.abc-select-modal {
+  &__overlay {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, .5);
+
+    &--active {
+      display: flex;
+      opacity: 0;
+      transition: opacity .2s ease;
+
+      > * {
+        transform: translateY(-10px);
+        transition: transform .2s ease;
+      }
+    }
+
+    &--visible {
+      opacity: 1;
+
+      > * {
+        transform: translateY(0);
+      }
+    }
+  }
+
+  &__content {
+    background-color: #fff;
+    border-radius: 5px;
+    max-height: 100%;
+    max-width: 100%;
+    overflow: auto;
+  }
+}
