@@ -5,7 +5,7 @@ const modal = new Modal()
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   switch (request) {
     case 'init':
-      modal.init()
+      modal.mount()
       break
 
     case 'toggle':

@@ -38,4 +38,20 @@
     max-width: 100%;
     overflow: auto;
   }
+
+  &__controls {
+    display: flex;
+
+    > button {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 2rem;
+      background-color: inherit;
+      border: none;
+      cursor: pointer;
+
+      &:last-child {
+        margin-left: auto;
+      }
+    }
+  }
 }
