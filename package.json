@@ -4,11 +4,12 @@
   },
   "dependencies": {
     "abcjs": "^4.1.1",
-    "eslint": "^4.19.1"
+    "from-html": "https://github.com/m3g4p0p/from-html.js"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
+    "eslint": "^4.19.1",
     "node-sass": "^4.8.3",
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",

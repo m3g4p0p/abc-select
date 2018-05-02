@@ -1,14 +1,24 @@
 import abcjs from 'abcjs'
-import { fromHTML } from './util'
+import fromHTML from 'from-html'
+
+import {
+  getTitle,
+  printNode,
+  trimBlankLines
+} from './util'
+
 import '../scss/modal.scss'
 
-const CLASS = {
+export const CLASS = {
   BASE: 'abc-select-modal',
   ELEMENT: {
     OVERLAY: '__overlay',
     CONTENT: '__content',
     NOTES: '__notes',
-    CONTROLS: '__controls'
+    CONTROLS: '__controls',
+    PRINT: '__print',
+    SAVE: '__save',
+    CLOSE: '__close',
   },
   MODIFIER: {
     ACTIVE: '--active',
@@ -22,9 +32,11 @@ export default class Modal {
       <div data-ref="overlay" class="${CLASS.BASE + CLASS.ELEMENT.OVERLAY}">
         <div class="${CLASS.BASE + CLASS.ELEMENT.CONTENT}">
           <div class="${CLASS.BASE + CLASS.ELEMENT.CONTROLS}">
-            <button data-ref="transposeDown">-</button>
-            <button data-ref="transposeUp">+</button>
-            <button data-ref="close">x</button>
+            <button data-ref="transposeDown">&#8681;</button>
+            <button data-ref="transposeUp">&#8679;</button>
+            <button data-ref="print" class=${CLASS.BASE + CLASS.ELEMENT.PRINT}>&#9113;</button>
+            <a data-ref="save" class=${CLASS.BASE + CLASS.ELEMENT.SAVE}>&#128427;</a>
+            <button data-ref="close" class=${CLASS.BASE + CLASS.ELEMENT.CLOSE}>&#128473;</button>
           </div>
           <div data-ref="notes" class="${CLASS.ELEMENT.NOTES}"></div>
         </div>
@@ -36,6 +48,10 @@ export default class Modal {
     this.isActive = false
     this.visualTranspose = 0
     this.selection = ''
+  }
+
+  get title () {
+    return getTitle(this.selection) || window.document.title
   }
 
   mount () {
@@ -58,6 +74,10 @@ export default class Modal {
     switch (target) {
       case this.overlay:
         this.toggleActive()
+        break
+
+      case this.print:
+        printNode(this.notes, this.title)
         break
 
       case this.transposeDown:
@@ -145,11 +165,13 @@ export default class Modal {
     }
 
     this.isActive = isActive
+
+    return this
   }
 
   transpose (value) {
     this.visualTranspose += value
-    this.render()
+    return this.render()
   }
 
   render () {
@@ -164,15 +186,42 @@ export default class Modal {
       selection,
       { visualTranspose }
     )
+
+    return this
+  }
+
+  updateDownloadURL () {
+    const blob = new Blob([this.selection], {
+      type: 'text/plain;charset=utf-8'
+    })
+
+    window.URL.revokeObjectURL(this.save.href)
+    this.save.href = window.URL.createObjectURL(blob)
+    this.save.download = this.title
+
+    return this
+  }
+
+  setSelection () {
+    const selection = window.getSelection().toString()
+
+    this.selection = trimBlankLines(selection) || this.selection
+    this.visualTranspose = 0
+
+    if (this.selection) {
+      this.render().updateDownloadURL()
+    }
+
+    return this
   }
 
   toggle () {
     this.toggleActive()
 
     if (this.isActive) {
-      this.selection = window.getSelection().toString()
-      this.visualTranspose = 0
-      this.render()
+      this.setSelection()
     }
+
+    return this
   }
 }
