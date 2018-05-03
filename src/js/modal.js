@@ -29,16 +29,16 @@ export const CLASS = {
 export default class Modal {
   constructor () {
     const refs = fromHTML(`
-      <div data-ref="overlay" class="${CLASS.BASE + CLASS.ELEMENT.OVERLAY}">
+      <div ref="overlay" class="${CLASS.BASE + CLASS.ELEMENT.OVERLAY}">
         <div class="${CLASS.BASE + CLASS.ELEMENT.CONTENT}">
           <div class="${CLASS.BASE + CLASS.ELEMENT.CONTROLS}">
-            <button data-ref="transposeDown">&#8681;</button>
-            <button data-ref="transposeUp">&#8679;</button>
-            <button data-ref="print" class=${CLASS.BASE + CLASS.ELEMENT.PRINT}>&#9113;</button>
-            <a data-ref="save" class=${CLASS.BASE + CLASS.ELEMENT.SAVE}>&#128427;</a>
-            <button data-ref="close" class=${CLASS.BASE + CLASS.ELEMENT.CLOSE}>&#128473;</button>
+            <button ref="transposeDown">&#8681;</button>
+            <button ref="transposeUp">&#8679;</button>
+            <button ref="print" class=${CLASS.BASE + CLASS.ELEMENT.PRINT}>&#9113;</button>
+            <a ref="save" class=${CLASS.BASE + CLASS.ELEMENT.SAVE}>&#128427;</a>
+            <button ref="close" class=${CLASS.BASE + CLASS.ELEMENT.CLOSE}>&#128473;</button>
           </div>
-          <div data-ref="notes" class="${CLASS.ELEMENT.NOTES}"></div>
+          <div ref="notes" class="${CLASS.ELEMENT.NOTES}"></div>
         </div>
       </div>
     `)
