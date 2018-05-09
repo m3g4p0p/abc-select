@@ -37,7 +37,7 @@ export default class Modal {
             <a ref="save" title="save selection">save</a>
             <button ref="close" title="close">&#128473;</button>
           </div>
-          <div ref="notes" class="${CLASS.ELEMENT.NOTES}"></div>
+          <div ref="notes" class="${CLASS.BASE + CLASS.ELEMENT.NOTES}"></div>
         </div>
       </div>
     `))

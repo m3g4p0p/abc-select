@@ -54,6 +54,7 @@
       text-shadow: none;
       color: black;
       font-size: 1em;
+      font-variant: none;
       line-height: 2;
       text-decoration: none;
       padding: 0 1em;
@@ -77,6 +78,7 @@
 
       &:last-child {
         margin-left: auto;
+        padding-right: .5em;
         font-weight: normal;
         font-size: 2rem;
       }
