@@ -4,7 +4,7 @@
   },
   "dependencies": {
     "abcjs": "^4.1.1",
-    "from-html": "^0.1.0"
+    "from-html": "^0.2.0"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^4.5.1",
