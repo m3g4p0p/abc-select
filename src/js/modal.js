@@ -15,10 +15,7 @@ export const CLASS = {
     OVERLAY: '__overlay',
     CONTENT: '__content',
     NOTES: '__notes',
-    CONTROLS: '__controls',
-    PRINT: '__print',
-    SAVE: '__save',
-    CLOSE: '__close',
+    CONTROLS: '__controls'
   },
   MODIFIER: {
     ACTIVE: '--active',
@@ -28,22 +25,22 @@ export const CLASS = {
 
 export default class Modal {
   constructor () {
-    const refs = fromHTML(`
+    Object.assign(this, fromHTML(`
       <div ref="overlay" class="${CLASS.BASE + CLASS.ELEMENT.OVERLAY}">
         <div class="${CLASS.BASE + CLASS.ELEMENT.CONTENT}">
           <div class="${CLASS.BASE + CLASS.ELEMENT.CONTROLS}">
-            <button ref="transposeDown">&#8681;</button>
-            <button ref="transposeUp">&#8679;</button>
-            <button ref="print" class=${CLASS.BASE + CLASS.ELEMENT.PRINT}>&#9113;</button>
-            <a ref="save" class=${CLASS.BASE + CLASS.ELEMENT.SAVE}>&#128427;</a>
-            <button ref="close" class=${CLASS.BASE + CLASS.ELEMENT.CLOSE}>&#128473;</button>
+            <span>transpose:</span>
+            <button ref="transposeUp" title="transpose up">up</button>
+            <button ref="transposeDown" title="transpose down">down</button>
+            <span>|</span>
+            <button ref="print" title="print notes">print</button>
+            <a ref="save" title="save selection">save</a>
+            <button ref="close" title="close">&#128473;</button>
           </div>
           <div ref="notes" class="${CLASS.ELEMENT.NOTES}"></div>
         </div>
       </div>
-    `)
-
-    Object.assign(this, refs)
+    `))
 
     this.isActive = false
     this.visualTranspose = 0
