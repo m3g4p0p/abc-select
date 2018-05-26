@@ -48,7 +48,7 @@ export default class Modal {
   }
 
   get title () {
-    return getTitle(this.selection) || window.document.title
+    return getTitle(this.selection) || document.title
   }
 
   mount () {
@@ -64,10 +64,6 @@ export default class Modal {
   }
 
   handleClick ({ target }) {
-    if (!this.isActive) {
-      return
-    }
-
     switch (target) {
       case this.overlay:
         this.toggleActive()
@@ -116,6 +112,10 @@ export default class Modal {
   }
 
   handleEvent (event) {
+    if (!this.isActive) {
+      return
+    }
+
     switch (event.type) {
       case 'click':
         this.handleClick(event)
